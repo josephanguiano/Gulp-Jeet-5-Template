@@ -11,7 +11,7 @@ You'll need to have the following items installed before continuing.
 
 ## Quickstart
 
-`>> git clone https://git.anguiano.me/christian/gulp-jeet5-template.git`
+`>> git clone https://github.com/christiananguiano/Gulp-Jeet-5-Template.git`
 
 `>> npm install (This will install all dependencies required for gulp to work.)
 `
