@@ -1,11 +1,11 @@
 {
   "name": "Gulp-Jeet5-Template",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "This is a Gulp template to start your own project using the Jeet framework",
   "main": "index.js",
-  "author": "",
+  "author": "https://github.com/christiananguiano/Gulp-Jeet-5-Template",
   "license": "BSD",
-  "repository": "https://git.anguiano.me/christian/gulp-jeet5-template.git",
+  "repository": "",
   "devDependencies": {
     "browser-sync": "latest",
     "gulp": "latest",
