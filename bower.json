@@ -1,0 +1,20 @@
+{
+  "name": "Gulp-Jeet-5-Template",
+  "version": "2.0.0",
+  "homepage": "https://github.com/christiananguiano/Gulp-Jeet-5-Template",
+  "authors": [
+    "Christian Anguiano <christian@anguiano.me>"
+  ],
+  "description": "This is a Gulp template to start your own project using the Jeet framework.",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jeet": "~6.1.2"
+  }
+}

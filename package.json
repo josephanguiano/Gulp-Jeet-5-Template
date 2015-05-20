@@ -1,20 +1,23 @@
 {
-    "name": "Gulp-Jeet5-Template",
-    "version": "1.0.0",
-    "description": "This is a Gulp template to start your own project using the Jeet framework",
-    "main": "index.js",
-    "author": "",
-    "license": "BSD",
-    "repository": "https://git.anguiano.me/christian/gulp-jeet5-template.git",
-    "devDependencies": {
-        "gulp": "~3.5.2",
-        "gulp-watch": "~0.5.0",
-        "gulp-imagemin": "~0.1.5",
-        "tiny-lr": "0.0.5",
-        "gulp-livereload": "~1.0.1",
-        "gulp-jade": "~0.4.1",
-        "gulp-uglify": "~0.2.1",
-        "gulp-plumber": "~0.5.6",
-        "gulp-stylus": "0.0.13"
-    }
+  "name": "Gulp-Jeet5-Template",
+  "version": "1.0.0",
+  "description": "This is a Gulp template to start your own project using the Jeet framework",
+  "main": "index.js",
+  "author": "",
+  "license": "BSD",
+  "repository": "https://git.anguiano.me/christian/gulp-jeet5-template.git",
+  "devDependencies": {
+    "browser-sync": "latest",
+    "gulp": "latest",
+    "gulp-autoprefixer": "latest",
+    "gulp-concat": "^2.5.2",
+    "gulp-copy": "0.0.2",
+    "gulp-imagemin": "latest",
+    "gulp-minify-css": "latest",
+    "gulp-notify": "^2.2.0",
+    "gulp-plumber": "latest",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "latest",
+    "gulp-uglify": "latest"
+  }
 }

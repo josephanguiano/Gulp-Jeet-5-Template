@@ -1,83 +1,61 @@
-// Gulp
-var gulp = require('gulp');
+'use strict';
 
-// Plugins
-var jade = require('gulp-jade');
-var stylus = require('gulp-stylus');
-var plumber = require('gulp-plumber');
-var uglify = require('gulp-uglify');
-var imagemin = require('gulp-imagemin');
-var livereload = require('gulp-livereload');
-var lr = require('tiny-lr');
-var server = lr();
+var gulp         = require('gulp'),
+    sass         = require('gulp-sass'),
+    plumber      = require('gulp-plumber'),
+    notify       = require('gulp-notify'),
+    autoprefixer = require('gulp-autoprefixer'),
+    minifyCss    = require('gulp-minify-css'),
+    rename       = require('gulp-rename'),
+    concat       = require('gulp-concat'),
+    uglify       = require('gulp-uglify'),
+    copy         = require('gulp-copy'),
+    browserSync  = require('browser-sync'),
+    reload       = browserSync.reload;
 
-// Paths
-var paths = {
-    scripts: ['assets/js/*.js'],
-    images: ['assets/img/**'],
-    fonts: ['assets/fonts/**']
-};
-
-// Jade to HTML
-gulp.task('jade', function() {
-    gulp.src(['**/*.jade', '!./{node_modules/**, node_modules}'])
-        .pipe(plumber())
-        .pipe(jade({
-            pretty: true
-        }))
-        .pipe(gulp.dest('Build/'))
-        .pipe(livereload(server));
+gulp.task('browser-sync', function() {
+  return browserSync({
+    notify: false,
+    files: ["./Build/**/*.html"],
+    server: {
+        baseDir: "./Build"
+    }
+  });
 });
 
-// Compile Stylus
-gulp.task('stylus', function() {
-    gulp.src(['assets/stylus/main.styl'])
-        .pipe(plumber())
-        .pipe(stylus({
-            'set': ['compress']
-        }))
-        .pipe(gulp.dest('Build/assets/css'))
-        .pipe(livereload(server));
-});
-// Uglify JS
-gulp.task('uglify', function() {
-    gulp.src(paths.scripts)
-        .pipe(plumber())
-        .pipe(uglify({
-            outSourceMap: false
-        }))
-        .pipe(gulp.dest('Build/assets/js'));
+gulp.task('styles', function () {
+  return gulp.src('./assets/scss/**/*.scss')
+    .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
+    .pipe(sass({
+      outputStyle: 'nested', // libsass doesn't support expanded yet
+      precision: 10,
+      includePaths: ['./bower_components/jeet/scss/jeet/', './bower_components/normalize.scss/'],
+      onError: console.error.bind(console, 'Sass error:')
+    }))
+    .pipe(minifyCss())
+    .pipe(rename({suffix: '.min'}))
+    .pipe(gulp.dest('./Build/assets/css'))
+    .pipe(reload({stream: true}));
 });
 
-// Compress images.
-gulp.task('imagemin', function() {
-    gulp.src(paths.images)
-        .pipe(plumber())
-        .pipe(imagemin())
-        .pipe(gulp.dest('Build/assets/img'));
+gulp.task('scripts', function() {
+  return gulp.src('./assets/js/*.js')
+    .pipe(concat('main.min.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('./Build/assets/js'))
+    .pipe(reload({stream: true}));
 });
 
-// Copy all static assets
-gulp.task('copyFonts', function() {
-    return gulp.src(paths.fonts)
-        .pipe(gulp.dest('Build/assets/fonts'));
+gulp.task('copy-html', function() {
+  return gulp.src('./*.html')
+    .pipe(plumber())
+    .pipe(copy('./Build'));
 });
 
-// Livereload
-gulp.task('listen', function(next) {
-    server.listen(35729, function(err) {
-        if (err) return console.log;
-        next();
-    });
+gulp.task("watch", ['browser-sync'], function() {
+  gulp.watch("./**/*.html", ['copy-html']);
+  gulp.watch("./assets/scss/**/*.scss", ['styles']);
+  gulp.watch("./assets/js/*.js", ["scripts"]);
 });
 
-// Watch files
-gulp.task('watch', function(event) {
-    gulp.watch('**/*.jade', ['jade']);
-    gulp.watch('assets/stylus/main.styl', ['stylus']);
-    gulp.watch(paths.images, ['imagemin']);
-    gulp.watch(paths.fonts, ['copyFonts']);
-    gulp.watch(paths.scripts, ['uglify']);
-});
-
-gulp.task('default', ['listen', 'watch']);
+gulp.task("default", ["browser-sync", "styles", "scripts", "watch"]);
