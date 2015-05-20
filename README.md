@@ -2,27 +2,41 @@
 
 This is a Gulp template to start your own project using the Jeet framework.
 
+### *Updated May 20, 2015:*
+*This template was mainly updated to replace live-reload with browser-sync, but it has also been updated with the latest version of Jeet using Bower*
+
+
 ## Requirements
 
-You'll need to have the following items installed before continuing.
+Make sure you have the following packages installed before continuing:
 
-  * [Node.js](http://nodejs.org): Use the installer provided on the NodeJS website.
-  * [Gulp](http://gulpjs.com/): Run `[sudo] npm install -g gulp`
+[Node.js](http://nodejs.org): Use the installer provided on the NodeJS website.
+
+[Gulp](http://gulpjs.com/): `npm install -g gulp`
+
+[Bower](http://bower.io/): `npm install -g bower`
+
+[Browser Sync:](http://www.browsersync.io/) `npm install -g browser-sync`
 
 ## Quickstart
 
-`>> git clone https://github.com/christiananguiano/Gulp-Jeet-5-Template.git`
+##### 1\. Clone the repo:
 
-`>> npm install (This will install all dependencies required for gulp to work.)
-`
+`$ git clone https://github.com/christiananguiano/Gulp-Jeet-5-Template.git`
 
-While you're working on your project, run:
+##### 2\. Install dependencies:
 
-`>> gulp`
+`$ npm install && bower install`
 
-And you're set!
+##### 3\. To start working on your project, simply run:
+
+`$ gulp`
+
+A new browser tab should open with a live preview of the site and Browser Sync ready to go. Check the terminal window for the exact URL.
 
 ## Directory Structure
 
-  * `assets/stylus/main.styl`: Application styles go here.
-  * `Build/`: compiled versions of Jade and sass go here.
+*   `./assets/scss/main.scss`: Application styles.
+*   `./Build/`: Compiled code.
+
+Link to git repository: [Gulp - Jeet 5 Template](https://github.com/christiananguiano/Gulp-Jeet-5-Template.git)
